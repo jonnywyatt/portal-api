@@ -1,0 +1,23 @@
+[
+	{
+		"id": 1,
+		"label": "Home",
+		"address": {
+			"numberOrName": "57",
+			"street": "Friars Avenue",
+			"postCode": "CM15 8HU"
+		},
+		"lat": 51.627383,
+		"lon": 0.326600
+	},
+	{
+		"id": 2,
+		"label": "Brentwood School Sports Centre",
+		"address": {
+			"street": "Middleton Hall Lane",
+			"postCode": "CM15 8DZ"
+		},
+		"lat": 51.619696,
+		"lon": 0.309288
+	}
+]

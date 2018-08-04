@@ -1,0 +1,20 @@
+[
+	{
+		"id": 1,
+		"label": "Exercise"
+	},
+	{
+		"id": 2,
+		"label": "Social"
+	},
+	{
+		"id": 3,
+		"label": "Cardio-vascular",
+		"parentId": 1
+	},
+	{
+		"id": 4,
+		"label": "Family",
+		"parentId": 2
+	}
+]

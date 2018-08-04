@@ -1,0 +1,30 @@
+[
+  {
+    "type": 1,
+    "subType": 1,
+    "startDateTime": "2017-07-28T17:00:00.000Z",
+    "locationIdStart": 1,
+    "quality": 4,
+    "people": [],
+    "user": 3
+  },
+  {
+    "type": 1,
+    "subType": 2,
+    "startDateTime": "2017-07-29T15:30:00.000Z",
+    "location": {
+      "start": {
+        "id": 2
+      }
+    },
+    "quality": 4,
+    "people": [
+      1,
+      2
+    ],
+    "tags": [
+      4
+    ],
+    "user": 3
+  }
+]

@@ -1,0 +1,12 @@
+[
+	{
+		"id": 1,
+		"label": "Running",
+		"tags": [3]
+	},
+	{
+		"id": 2,
+		"label": "Badminton",
+		"tags": [3, 2]
+	}
+]
