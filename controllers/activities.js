@@ -1,14 +1,17 @@
+const transformActivities = require('./transforms/activities');
+const logger = require('../logger');
+
 module.exports = {
 	create (req, res) {
-		const { type, sub_type, user, people, start_date_time, end_date_time, location_start, location_end, quality, url, distance_km } = req.body;
+		const { type, subtype, user, people, start_date_time, duration_min, location_start, location_end, quality, url, distance_km } = req.body;
 		req.app.get('db').activities
 			.insert({
 				type,
-				sub_type,
+				subtype,
 				user,
 				people,
 				start_date_time,
-				end_date_time,
+				duration_min,
 				quality,
 				location_start,
 				location_end,
@@ -20,7 +23,7 @@ module.exports = {
 	},
 	list (req, res) {
 		req.app.get('db').query(
-			`SELECT activities.id, activities.user, activities.people, activities.start_date_time, activities.end_date_time, activities.quality, activities.quality, activities.url, activities.distance_km, 
+			`SELECT activities.id, activities.type, activities.user, activities.people, activities.start_date_time, activities.duration_min, activities.quality, activities.quality, activities.url, activities.distance_km, 
 			types.label as type_label,
 			subtypes.label as subtype_label,
 			locations_start.id as locations_start_id, locations_start.label as locations_start_label,
@@ -38,7 +41,7 @@ module.exports = {
 			{
 				decompose: {
 					pk: 'id',
-					columns: ['id', 'type', 'type_label', 'subtype_label', 'user', 'start_date_time', 'end_date_time', 'quality', 'url', 'distance_km'],
+					columns: ['id', 'type', 'type_label', 'subtype_label', 'user', 'quality', 'url', 'distance_km'],
 					people: {
 						pk: 'people_id',
 						columns: {
@@ -46,6 +49,12 @@ module.exports = {
 							people_label: 'label'
 						},
 						array: true
+					},
+					time: {
+						columns: {
+							start_date_time: 'start',
+							duration_min: 'duration'
+						}
 					},
 					location: {
 						start: {
@@ -69,7 +78,11 @@ module.exports = {
 					}
 				}
 			})
+			.then(transformActivities)
 			.then(activities => res.status(200).send(activities))
-			.catch(error => res.status(400).send(error));
+			.catch(error => {
+				logger(error);
+				return res.status(500).send(error)
+			});
 	}
 };
